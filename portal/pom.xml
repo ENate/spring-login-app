@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.minejava</groupId>
 	<artifactId>portal</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>portal</name>
 	<description>A sample login application</description>
 	<properties>
@@ -35,8 +35,8 @@
 			<artifactId>spring-boot-docker-compose</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

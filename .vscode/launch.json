@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PortalApplication",
+            "request": "launch",
+            "mainClass": "PortalApplication",
+            "projectName": "portal"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
