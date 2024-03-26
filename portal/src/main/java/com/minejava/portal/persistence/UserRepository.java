@@ -1,4 +1,11 @@
 package com.minejava.portal.persistence;
 
-public interface UserRepository {
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
+
+
+public interface UserRepository extends CrudRepository<User, Integer> {
+
+    Optional<User> findByUsername(String username);
 }
