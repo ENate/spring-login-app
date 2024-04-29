@@ -1,8 +1,8 @@
 package com.minejava.portal.service;
 
-import com.minejava.portal.persistence.User;
+import com.minejava.portal.persistence.entity.UserEntity;
 
 public interface IUserService {
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 }

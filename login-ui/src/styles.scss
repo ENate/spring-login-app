@@ -1,0 +1,30 @@
+@use "@carbon/styles/scss/config" with (
+	// Use flexbox for grid - stick to CSS Grid or Flexbox
+	// CSS Grid has become the default grid system in v11
+	$use-flexbox-grid: true
+);
+
+@use "@carbon/styles";
+
+.white {
+	@include styles.theme(styles.$white);
+}
+
+.g10 {
+	@include styles.theme(styles.$g10);
+}
+
+.g90 {
+	@include styles.theme(styles.$g90);
+}
+
+.g100 {
+	@include styles.theme(styles.$g100);
+}
+
+
+// Want to use only one theme? Add the css variables directly in root
+
+// body {
+// 	@include styles.theme(styles.$white);
+// }
