@@ -24,3 +24,5 @@ login-ui/.angular
 hs_err_pid*
 portal/.settings
 portal/.mvn
+cloud-terraform
+docker/mongodb/data

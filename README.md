@@ -6,8 +6,12 @@ This repo contains a spring boot Angular full stack appliation developed using t
 - Spring Boot 3.2.+
 - Typescript 5.0
 - Angular 17.+
-- Spring Security 6.0+
-and other latest tools.
+- Spring Security 6.0+.
+
+### Infra Tools
+- Hahsicorp Vault
+- Terraform (to provision vault users on keycloak)
+- keycloak (with security as basis for production). (Note: more configuration is needed to secure keycloak for production workloads)
 
 ## How to Run
 - Install the minimum required JDK version. Fllowing the instructions on the IBM Carbon Design and Angular websites.
