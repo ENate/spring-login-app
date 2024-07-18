@@ -1,0 +1,12 @@
+# Define custom port number
+server:
+    port: 8180
+spring:
+    jpa:
+        generate-ddl: true
+    # Add some datastax database connection
+    # Use vault to store and retrieve secrets
+    # Define spring Mongo URI
+    data:
+        mongodb:
+            uri: mongodb://myroot:password@localhost:27017/portal-service?authSource=admin
