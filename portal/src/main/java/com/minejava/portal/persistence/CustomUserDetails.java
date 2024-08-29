@@ -10,7 +10,8 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
-    private final UserEntity entity;
+    private static final long serialVersionUID = 1L;
+	private final UserEntity entity;
 
     public CustomUserDetails(UserEntity entity) {
         this.entity = entity;
