@@ -8,6 +8,6 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: myroot
             MONGO_INITDB_ROOT_PASSWORD: password
-            MONGO_INITDB_DATABASE: product-service
+            MONGO_INITDB_DATABASE: portal
         volumes:
-            - ./docker/mongodb/data:/data/db
+            - ./docker/mongodb/data_portal:/data/db

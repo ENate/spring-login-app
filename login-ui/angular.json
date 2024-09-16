@@ -10,7 +10,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"carbon-angular-starter": {
+		"login-ui": {
 			"root": "",
 			"sourceRoot": "src",
 			"projectType": "application",
@@ -66,36 +66,36 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "carbon-angular-starter:build"
+						"browserTarget": "login-ui:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "carbon-angular-starter:build:production"
+							"browserTarget": "login-ui:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "carbon-angular-starter:build"
+						"browserTarget": "login-ui:build"
 					}
 				},
 				"e2e": {
 					"builder": "@cypress/schematic:cypress",
 					"options": {
-						"devServerTarget": "carbon-angular-starter:serve",
+						"devServerTarget": "login-ui:serve",
 						"watch": true,
 						"headless": false
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "carbon-angular-starter:serve:production"
+							"devServerTarget": "login-ui:serve:production"
 						}
 					}
 				}
 			}
 		},
-		"carbon-angular-starter-e2e": {
+		"login-ui-e2e": {
 			"root": "e2e",
 			"sourceRoot": "e2e",
 			"projectType": "application",
@@ -103,25 +103,25 @@
 				"e2e": {
 					"builder": "@cypress/schematic:cypress",
 					"options": {
-						"devServerTarget": "carbon-angular-starter-e2e:serve",
+						"devServerTarget": "login-ui-e2e:serve",
 						"watch": true,
 						"headless": false
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "carbon-angular-starter-e2e:serve:production"
+							"devServerTarget": "login-ui-e2e:serve:production"
 						}
 					}
 				},
 				"cypress-run": {
 					"builder": "@cypress/schematic:cypress",
 					"options": {
-						"devServerTarget": "carbon-angular-starter-e2e:serve",
+						"devServerTarget": "login-ui-e2e:serve",
 						"configFile": "e2e/cypress.config.ts"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "carbon-angular-starter-e2e:serve:production"
+							"devServerTarget": "login-ui-e2e:serve:production"
 						}
 					}
 				},
