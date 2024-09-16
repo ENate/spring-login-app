@@ -30,3 +30,5 @@ cloud-terraform
 docker/mongodb/data
 portal/.factorypath
 portal/.classpath
+docker/mongodb/data_portal
+frontend
