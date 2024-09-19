@@ -1,35 +1,57 @@
 
 package com.minejava.portal.persistence;
 
-import com.minejava.portal.persistence.entity.UserEntity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "_user")
 public class CustomUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
-	private final UserEntity entity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public CustomUserDetails(UserEntity entity) {
-        this.entity = entity;
-    }
-
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return entity.getPassword();
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getUsername() {
-        return entity.getUsername();
+        // email in our case
+        return email;
     }
 
     @Override
@@ -50,5 +72,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+    
+    @Override
+    public String getPassword() {
+    	return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.minejava.portal.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.minejava.portal.persistence.entity.UserEntity;
@@ -12,4 +13,10 @@ public class UserServiceImpl implements IUserService {
         // TO DO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findByUsername'");
     }
+
+	@Override
+	public UserDetailsService userDetailsService() {
+		// TO BE DONE Auto-generated method stub
+		return null;
+	}
 }

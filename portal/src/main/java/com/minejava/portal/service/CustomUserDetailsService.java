@@ -1,27 +1,35 @@
 package com.minejava.portal.service;
 
-import com.minejava.portal.persistence.CustomUserDetails;
 import com.minejava.portal.persistence.UserRepository;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import com.minejava.portal.persistence.entity.UserEntity;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 
-@Configuration
-@EnableWebSecurity
-public class CustomUserDetailsService implements UserDetailsService {
+@Service
+public class CustomUserDetailsService implements IUserService {
 
     private final UserRepository userRepository;
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-        return userRepository
-                .findByUsername(username)
-                .map(CustomUserDetails::new)
-                .orElseThrow(() -> new UsernameNotFoundException("Not found user with Username: " + username));
+    
+	@Override
+	public UserEntity findByUsername(String username) {
+		// TO DO Auto-generated method stub
+		return null;
+	}
+	@Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                return userRepository.findByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 }
