@@ -1,6 +1,5 @@
 package com.minejava.portal.config;
 
-
 import com.minejava.portal.service.IUserService;
 
 import org.springframework.context.annotation.Bean;
@@ -24,9 +23,9 @@ public class SecurityConfig {
 
     private final IUserService iUserService;
     private final JwtAuthenticationFilter jwtFilter;
-    
+
     public SecurityConfig(IUserService userDetailsService, JwtAuthenticationFilter jwtFilter) {
-    	this.jwtFilter = jwtFilter;
+        this.jwtFilter = jwtFilter;
         this.iUserService = userDetailsService;
     }
 
@@ -42,23 +41,23 @@ public class SecurityConfig {
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-    
+
     @Bean
     PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     AuthenticationProvider authenticationProvider() {
-    	DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    	authProvider.setUserDetailsService(iUserService.userDetailsService());
-    	authProvider.setPasswordEncoder(passwordEncoder());
-    	return authProvider;
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(iUserService.userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
-    
+
     @Bean
     AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
-    	return config.getAuthenticationManager();
+        return config.getAuthenticationManager();
     }
 
 }
