@@ -40,8 +40,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Override
 	public JwtAuthenticationResponse signup(SignUpRequest request) {
 		// Implement user sign up
-		var user = CustomUserDetails.builder().firstName(request.getFirstName()).lastName(request.getLastName())
-				.email(request.getEmail()).password(passwordEncoder.encode(request.getPassword()))
+		var user = CustomUserDetails
+				.builder()
+				.firstName(request.getFirstName())
+				.lastName(request.getLastName())
+				.email(request.getEmail())
+				.password(passwordEncoder.encode(request.getPassword()))
 				.role(Role.USER).build();
 		// Save into user repository
 		userRepository.save(user);
