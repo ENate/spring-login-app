@@ -6,14 +6,14 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, 
 	withRouterConfig({
-	        onSameUrlNavigation: 'reload'
-	      }),
-	      withInMemoryScrolling({
-	        scrollPositionRestoration: 'top',
-	        anchorScrolling: 'enabled'
-	      }),
-	      withEnabledBlockingInitialNavigation(),
-	      withViewTransitions(),
-	      withHashLocation()
-  )]
+		onSameUrlNavigation: 'reload'
+	}),
+	withInMemoryScrolling({
+		scrollPositionRestoration: 'top',
+		anchorScrolling: 'enabled'
+	}),
+	withEnabledBlockingInitialNavigation(),
+	withViewTransitions(),
+	withHashLocation()
+)]
 };
