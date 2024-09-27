@@ -2,10 +2,12 @@ package com.minejava.portal.persistence;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 
-public interface UserRepository extends CrudRepository<CustomUserDetails, Integer> {
+public interface UserRepository extends MongoRepository<UserEntity, String> {
 
-    Optional<CustomUserDetails> findByEmail(String username);
+    Optional<UserEntity> findByEmail(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

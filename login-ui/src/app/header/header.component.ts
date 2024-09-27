@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
 import { RouterLink } from '@angular/router';
+import { httpInterceptorProviders } from '../_helpers/auth.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, HttpClientModule],
+  providers: [httpInterceptorProviders],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

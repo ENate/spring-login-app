@@ -1,8 +1,9 @@
 package com.minejava.portal.persistence.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.*;
 
 
@@ -13,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Entity(name = "user_model")
+@Document(collection = "user_model")
 public class UserEntity {
 
     @Id

@@ -1,6 +1,7 @@
 package com.minejava.portal.config;
 
 import com.minejava.portal.service.IUserService;
+import com.minejava.portal.service.JwtService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +23,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final IUserService iUserService;
-    private final JwtAuthenticationFilter jwtFilter;
+    private final JwtService jwtService;
+    //private final JwtAuthenticationFilter jwtFilter;
 
-    public SecurityConfig(IUserService userDetailsService, JwtAuthenticationFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
+    public SecurityConfig(IUserService userDetailsService, JwtService jwtService) {
+        //this.jwtFilter = jwtFilter;
+        this.jwtService = jwtService;
         this.iUserService = userDetailsService;
     }
+
+    @Bean
+    JwtAuthenticationFilter jwtTokenFilter(JwtService jwtService, IUserService iUserService) {
+    return new JwtAuthenticationFilter(jwtService, iUserService);
+}
 
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -38,7 +46,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated())
             .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtTokenFilter(jwtService, iUserService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

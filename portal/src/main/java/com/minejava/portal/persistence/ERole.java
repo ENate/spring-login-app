@@ -1,5 +1,7 @@
 package com.minejava.portal.persistence;
 
-public enum Role {
-	ADMIN, USER
+public enum ERole {
+	ROLE_USER,
+	ROLE_MODERATOR,
+	ROLE_ADMIN
 }
