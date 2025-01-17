@@ -18,45 +18,47 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
-	
+
 	private final JwtUtils jwtUtils;
-	
+
 	private final CustomUserDetailsService userDetailsService;
-	
+
 	public JwtTokenFilter(CustomUserDetailsService userDetails,
 			JwtUtils jwtUtils) {
 		this.userDetailsService = userDetails;
 		this.jwtUtils = jwtUtils;
-		
+
 	}
 
 	@Override
 	protected void doFilterInternal(
-			@NonNull HttpServletRequest request, 
-			@NonNull HttpServletResponse response, 
+			@NonNull HttpServletRequest request,
+			@NonNull HttpServletResponse response,
 			@NonNull FilterChain filterChain)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// DONE Auto-generated method stub
 		try {
-		      String jwt = parseJwt(request);
-		      if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-		        String username = jwtUtils.getUserNameFromJwtToken(jwt);
+			String jwt = parseJwt(request);
+			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-		        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-		        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
-		            userDetails.getAuthorities());
-		        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+						userDetails, null,
+						userDetails.getAuthorities());
+				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-		        SecurityContextHolder.getContext().setAuthentication(authentication);
-		      }
-		    } catch (Exception e) {
-		      logger.error("Cannot set user authentication: {}", e);
-		    }
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+		} catch (Exception e) {
+			logger.error("Cannot set user authentication: {}", e);
+		}
 		filterChain.doFilter(request, response);
 	}
+
 	private String parseJwt(HttpServletRequest request) {
-	    String jwt = jwtUtils.getJwtFromCookies(request);
-	    return jwt;
-	  }
+		String jwt = jwtUtils.getJwtFromCookies(request);
+		return jwt;
+	}
 
 }

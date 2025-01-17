@@ -21,11 +21,11 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.MacAlgorithm;
 
 public class JwtServiceImpl implements JwtService {
-	
-	@Value("${token.signing.key}")
-	private String jwtSigningKey;
-	
-	@Override
+
+    @Value("${token.signing.key}")
+    private String jwtSigningKey;
+
+    @Override
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -47,15 +47,15 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-    	MacAlgorithm alg = Jwts.SIG.HS256;
-    	SecretKey key = alg.key().build();
+        MacAlgorithm alg = Jwts.SIG.HS256;
+        SecretKey key = alg.key().build();
         return Jwts
-        		.builder()
-        		.claims(extraClaims)
-        		.subject(userDetails.getUsername())
+                .builder()
+                .claims(extraClaims)
+                .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                //.signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                // .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .signWith(getSigningKey())
                 .signWith(key, alg)
                 .compact();
@@ -70,21 +70,21 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-    	MacAlgorithm alg = Jwts.SIG.HS512; //or HS384 or HS256
-    	SecretKey key = alg.key().build();
+        MacAlgorithm alg = Jwts.SIG.HS512; // or HS384 or HS256
+        SecretKey key = alg.key().build();
 
         return Jwts
-        		.parser()
-        		.verifyWith(key)
-        		//.setSigningKey(getSigningKey())
-        		.build()
-        		.parseSignedClaims(token)
+                .parser()
+                .verifyWith(key)
+                // .setSigningKey(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
                 .getPayload();
     }
 
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
-    	// byte[] keyBytes = jwtSigningKey.getBytes(StandardCharsets.UTF_8);
+        // byte[] keyBytes = jwtSigningKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

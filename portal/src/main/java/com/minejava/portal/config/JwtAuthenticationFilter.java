@@ -18,7 +18,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	private final JwtService jwtService;
@@ -31,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(
-			@NonNull HttpServletRequest request, 
-			@NonNull HttpServletResponse response, 
+			@NonNull HttpServletRequest request,
+			@NonNull HttpServletResponse response,
 			@NonNull FilterChain filterChain)
 			throws ServletException, IOException {
 		// Get Authorization header
@@ -47,20 +46,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		jwt = header.substring(7);
 		userEmail = jwtService.extractUserName(jwt);
 		if (StringUtils.isNotEmpty(userEmail) &&
-		 SecurityContextHolder.getContext().getAuthentication() == null) {
+				SecurityContextHolder.getContext().getAuthentication() == null) {
 			UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
 			if (jwtService.isTokenValid(jwt, userDetails)) {
 				SecurityContext context = SecurityContextHolder.createEmptyContext();
-				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, 
+				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
+						null,
 						userDetails.getAuthorities());
 				context.setAuthentication(authToken);
-				
+
 				SecurityContextHolder.setContext(context);
 			}
 		}
 		filterChain.doFilter(request, response);
-		
+
 	}
-	
 
 }
